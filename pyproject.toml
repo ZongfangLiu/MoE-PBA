@@ -1,0 +1,68 @@
+[project]
+name = "moe-pba"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "accelerate==1.13.0",
+    "datasets==3.6.0",
+    "fsspec[http]==2025.3.0",
+    "numpy==2.2.6",
+    "pandas==2.3.3",
+    "pyarrow==23.0.1",
+    "torch==2.9.1",
+    "transformers==5.0.0",
+    "pyyaml==6.0.3",
+]
+
+[project.optional-dependencies]
+evaluation = [
+    "httpx[socks]==0.28.1",
+    "lm-eval[api]==0.4.11",
+    "openai==2.30.0",
+    "evalplus @ git+https://github.com/mklasby/evalplus.git@59e9263ab2aa6d8cbfe3229cd05039de3bc43d67",
+    "evalscope @ git+https://github.com/modelscope/evalscope.git@d3bec2b94a81eec2d1cc15af2a29547a4f5c5368",
+    "modelscope[datasets,framework]==1.34.0",
+    "oss2==2.19.1",
+]
+
+[project.scripts]
+moe-pba = "moe_pba.__main__:main"
+moe-pba-eval = "moe_pba.eval:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0", "editables>=0.5"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+exclude = [
+    "/.venv",
+    "/*.pdf",
+    "/artifacts",
+    "/src/models",
+    "**/.DS_Store",
+    "**/__pycache__",
+    "**/*.py[cod]",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/moe_pba"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/.gitignore",
+    "/README.md",
+    "/pyproject.toml",
+    "/requirements.txt",
+    "/requirements-livecodebench.txt",
+    "/requirements-transformers-override.txt",
+    "/scripts",
+    "/src/moe_pba",
+]
+
+[tool.ruff]
+line-length = 120

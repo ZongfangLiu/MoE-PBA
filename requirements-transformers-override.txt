@@ -1,0 +1,7 @@
+transformers==5.0.0
+huggingface-hub==1.9.0
+numpy==2.2.6
+fsspec[http]==2025.3.0
+protobuf==5.29.6
+grpcio-reflection==1.71.2
+grpcio-status==1.71.2
